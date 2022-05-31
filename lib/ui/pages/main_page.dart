@@ -1,7 +1,11 @@
+import 'package:airplane/cubit/page_cubit.dart';
 import 'package:airplane/ui/pages/home_page.dart';
 import 'package:airplane/ui/pages/setting_page.dart';
+import 'package:airplane/ui/pages/transaction_page.dart';
+import 'package:airplane/ui/pages/wallet_page.dart';
 import 'package:airplane/ui/widgets/custom_bottom_navigation_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../shared/theme.dart';
 
 class MainPage extends StatelessWidget {
@@ -28,16 +32,19 @@ class MainPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomBottomNavigationItem(
+                index: 0,
                 imageUrl: 'assets/icon_home.png',
-                isSelected: true,
               ),
               CustomBottomNavigationItem(
+                index: 1,
                 imageUrl: 'assets/icon_booking.png',
               ),
               CustomBottomNavigationItem(
+                index: 2,
                 imageUrl: 'assets/icon_card.png',
               ),
               CustomBottomNavigationItem(
+                index: 3,
                 imageUrl: 'assets/icon_setting.png',
               ),
             ],
@@ -46,17 +53,32 @@ class MainPage extends StatelessWidget {
       );
     }
 
-    Widget buildContent() {
-      return HomePage();
+    Widget buildContent(int curentIndex) {
+      switch (curentIndex) {
+        case 0:
+          return HomePage();
+        case 1:
+          return TransactionPage();
+        case 2:
+          return WalletPage();
+        case 3:
+          return SettingPage();
+        default:
+          return HomePage();
+      }
     }
 
-    return Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Stack(
-          children: [
-            buildContent(),
-            customBottomNavgation(),
-          ],
-        ));
+    return BlocBuilder<PageCubit, int>(
+      builder: (context, curentIndex) {
+        return Scaffold(
+            backgroundColor: kBackgroundColor,
+            body: Stack(
+              children: [
+                buildContent(curentIndex),
+                customBottomNavgation(),
+              ],
+            ));
+      },
+    );
   }
 }
