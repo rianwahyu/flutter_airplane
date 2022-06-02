@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:airplane/cubit/auth_cubit.dart';
 import 'package:airplane/ui/pages/get_started_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 //untuk rubah stl ke stf hanya dgn command + .
 class SplashPage extends StatefulWidget {
@@ -29,6 +31,7 @@ class _SplashPageState extends State<SplashPage> {
             context, '/get-started', (route) => false);
       } else {
         print(user.email);
+        context.read<AuthCubit>().getCurentUser(user.uid);
         Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
       }
     });
