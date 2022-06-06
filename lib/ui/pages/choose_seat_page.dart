@@ -1,11 +1,16 @@
+import 'package:airplane/cubit/seat_cubit.dart';
+import 'package:airplane/models/destination_model.dart';
 import 'package:airplane/shared/theme.dart';
 import 'package:airplane/ui/pages/checkout_page.dart';
 import 'package:airplane/ui/widgets/custom_button.dart';
 import 'package:airplane/ui/widgets/seat_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class ChooseSeatPage extends StatelessWidget {
-  const ChooseSeatPage({Key? key}) : super(key: key);
+  final DestinationModel destination;
+  const ChooseSeatPage(this.destination, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,322 +88,312 @@ class ChooseSeatPage extends StatelessWidget {
     }
 
     Widget selectSeat() {
-      return Container(
-        width: double.infinity,
-        margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 30,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          color: kWhiteColor,
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      return BlocBuilder<SeatCubit, List<String>>(
+        builder: (context, state) {
+          return Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(top: 30),
+            padding: EdgeInsets.symmetric(
+              horizontal: 22,
+              vertical: 30,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: kWhiteColor,
+            ),
+            child: Column(
               children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'A',
-                      style: greyTextStyle.copyWith(
-                        fontSize: 16,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'A',
+                          style: greyTextStyle.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'B',
+                          style: greyTextStyle.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          '',
+                          style: greyTextStyle.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'C',
+                          style: greyTextStyle.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'D',
+                          style: greyTextStyle.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 16,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A1',
+                        isAvailable: false,
+                      ),
+                      SeatItem(
+                        id: 'B1',
+                        isAvailable: false,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 16),
+                        width: 48,
+                        height: 48,
+                        child: Center(
+                          child: Text(
+                            '1',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C1',
+                      ),
+                      SeatItem(
+                        id: 'D1',
+                      ),
+                    ],
                   ),
                 ),
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'B',
-                      style: greyTextStyle.copyWith(
-                        fontSize: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A2',
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B2',
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 16),
+                        width: 48,
+                        height: 48,
+                        child: Center(
+                          child: Text(
+                            '2',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C2',
+                      ),
+                      SeatItem(
+                        id: 'D2',
+                      ),
+                    ],
                   ),
                 ),
+
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      '',
-                      style: greyTextStyle.copyWith(
-                        fontSize: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A3',
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B3',
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 16),
+                        width: 48,
+                        height: 48,
+                        child: Center(
+                          child: Text(
+                            '3',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C3',
+                      ),
+                      SeatItem(
+                        id: 'D3',
+                      ),
+                    ],
                   ),
                 ),
+
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'C',
-                      style: greyTextStyle.copyWith(
-                        fontSize: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A4',
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B4',
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 16),
+                        width: 48,
+                        height: 48,
+                        child: Center(
+                          child: Text(
+                            '4',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C4',
+                      ),
+                      SeatItem(
+                        id: 'D4',
+                      ),
+                    ],
                   ),
                 ),
+
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'D',
-                      style: greyTextStyle.copyWith(
-                        fontSize: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A5',
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B5',
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 16),
+                        width: 48,
+                        height: 48,
+                        child: Center(
+                          child: Text(
+                            '5',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C5',
+                      ),
+                      SeatItem(
+                        id: 'D5',
+                      ),
+                    ],
+                  ),
+                ),
+
+                //container Seat
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 30,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Your seat',
+                        style: greyTextStyle.copyWith(
+                          fontWeight: ligth,
+                        ),
+                      ),
+                      Text(
+                        state.join(', '),
+                        style: blackTextStyle.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+                //container total
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 16,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Total',
+                        style: greyTextStyle.copyWith(
+                          fontWeight: ligth,
+                        ),
+                      ),
+                      Text(
+                        NumberFormat.currency(
+                          locale: 'ID',
+                          symbol: 'IDR ',
+                          decimalDigits: 0,
+                        ).format(state.length * destination.price),
+                        style: purpleTextStyle.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            Container(
-              margin: EdgeInsets.only(
-                top: 16,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 2,
-                    id: 'A1',
-                  ),
-                  SeatItem(
-                    status: 2,
-                    id: 'B1',
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 16),
-                    width: 48,
-                    height: 48,
-                    child: Center(
-                      child: Text(
-                        '1',
-                        style: greyTextStyle.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'C1',
-                  ),
-                  SeatItem(
-                    status: 2,
-                    id: 'D1',
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 0,
-                    id: 'A2',
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'B2',
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 16),
-                    width: 48,
-                    height: 48,
-                    child: Center(
-                      child: Text(
-                        '2',
-                        style: greyTextStyle.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'C2',
-                  ),
-                  SeatItem(
-                    status: 2,
-                    id: 'D2',
-                  ),
-                ],
-              ),
-            ),
-
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 0,
-                    id: 'A3',
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'B3',
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 16),
-                    width: 48,
-                    height: 48,
-                    child: Center(
-                      child: Text(
-                        '3',
-                        style: greyTextStyle.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'C3',
-                  ),
-                  SeatItem(
-                    status: 2,
-                    id: 'D3',
-                  ),
-                ],
-              ),
-            ),
-
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 0,
-                    id: 'A4',
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'B4',
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 16),
-                    width: 48,
-                    height: 48,
-                    child: Center(
-                      child: Text(
-                        '4',
-                        style: greyTextStyle.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'C4',
-                  ),
-                  SeatItem(
-                    status: 2,
-                    id: 'D4',
-                  ),
-                ],
-              ),
-            ),
-
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 0,
-                    id: 'A5',
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'B5',
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 16),
-                    width: 48,
-                    height: 48,
-                    child: Center(
-                      child: Text(
-                        '5',
-                        style: greyTextStyle.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                    id: 'C5',
-                  ),
-                  SeatItem(
-                    status: 2,
-                    id: 'D5',
-                  ),
-                ],
-              ),
-            ),
-
-            //container Seat
-            Container(
-              margin: EdgeInsets.only(
-                top: 30,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Your seat',
-                    style: greyTextStyle.copyWith(
-                      fontWeight: ligth,
-                    ),
-                  ),
-                  Text(
-                    'A3, B3',
-                    style: blackTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: medium,
-                    ),
-                  )
-                ],
-              ),
-            ),
-
-            //container total
-            Container(
-              margin: EdgeInsets.only(
-                top: 16,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total',
-                    style: greyTextStyle.copyWith(
-                      fontWeight: ligth,
-                    ),
-                  ),
-                  Text(
-                    'Rp 540.000.000',
-                    style: purpleTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: medium,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       );
     }
 
